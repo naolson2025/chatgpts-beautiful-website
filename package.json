@@ -1,0 +1,23 @@
+{
+  "name": "chatgpts-beautiful-website",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/naolson2025/chatgpts-beautiful-website#readme",
+  "bugs": {
+    "url": "https://github.com/naolson2025/chatgpts-beautiful-website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naolson2025/chatgpts-beautiful-website.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "dev": "live-server"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
