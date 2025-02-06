@@ -1,6 +1,5 @@
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
-const loveNote = document.getElementById("love-note");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -16,6 +15,8 @@ class Star {
         this.radius = Math.random() * 2;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
+        this.originalX = this.x;
+        this.originalY = this.y;
     }
 
     draw() {
@@ -28,6 +29,12 @@ class Star {
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
+
+        // Parallax effect
+        let dx = this.originalX - mouse.x;
+        let dy = this.originalY - mouse.y;
+        this.x -= dx * 0.001;
+        this.y -= dy * 0.001;
 
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
@@ -51,12 +58,18 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-canvas.addEventListener("click", () => {
-    loveNote.classList.remove("hidden");
-    setTimeout(() => {
-        loveNote.style.opacity = "1";
-    }, 100);
+// Capture mouse movement for parallax effect
+window.addEventListener("mousemove", (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
 });
 
 createStars();
 animate();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = [];
+    createStars();
+});
